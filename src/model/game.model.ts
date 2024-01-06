@@ -1,5 +1,8 @@
 export interface Game {
-    id: number
+    id_game: number
     name: string
-    genre: string
+    release_date: Date
+    rating: number
+    genre_id: number
+    company_id: number
 }
