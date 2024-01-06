@@ -26,7 +26,9 @@ export class GenreController {
     }
 
     async addGenre(req: Request, res: Response){
-        const {description} = req.body
+        
+        // variável tem que ser igual á variável da bd
+        const {genre_desc: description} = req.body
 
         const id = await this.genreRepository.addGenre(description)
 
