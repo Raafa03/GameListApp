@@ -1,4 +1,4 @@
 export interface Genre {
     id_genre: number
-    description: string
+    genre_desc: string
 }
