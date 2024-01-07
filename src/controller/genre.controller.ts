@@ -26,12 +26,38 @@ export class GenreController {
     }
 
     async addGenre(req: Request, res: Response){
-        
-        // variável tem que ser igual á variável da bd
-        const {genre_desc: description} = req.body
+        const {genre_desc} = req.body
 
-        const id = await this.genreRepository.addGenre(description)
+        const id = await this.genreRepository.addGenre(genre_desc)
 
         res.status(201).json({id:id})
+    }
+
+    async updateGenre(req: Request, res: Response) {
+        const { genreId } = req.params
+        const { genre_desc} = req.body
+
+        const updatedGenre = await this.genreRepository.updateGenreById(
+            parseInt(genreId),
+            genre_desc
+        );
+
+        if (!updatedGenre) {
+            res.status(404).json({ error: "genre not found" });
+        }
+
+        res.status(200).json(updatedGenre);
+    }
+
+    async deleteGenre(req: Request, res: Response) {
+        const { genreId } = req.params;
+
+        const deletedGenre = await this.genreRepository.deleteGenreById(parseInt(genreId));
+
+        if (!deletedGenre) {
+            res.status(404).json({ error: "genre not found" });
+        }
+
+        res.status(200).json({ message: "genre deleted successfully" });
     }
 }
