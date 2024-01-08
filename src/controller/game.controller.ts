@@ -99,6 +99,7 @@ export class GameController{
         res.status(201).json({id:id})
     }
 
+
     async updateGame(req: Request, res: Response) {
         const { gameId } = req.params
         const { name, release_date, rating, genre_id, company_id } = req.body
@@ -129,6 +130,35 @@ export class GameController{
         }
 
         res.status(200).json({ message: "game deleted successfully" })
+    }
+
+    async updateLinkGameToPlatformById(req: Request, res: Response) {
+        const { game_platformId } = req.params;
+        const { game_id, platform_id } = req.body;
+    
+        const updatedLink = await this.gameRepository.updateLinkGameToPlatformById({
+            id_game_platform: parseInt(game_platformId),
+            game_id: parseInt(game_id),
+            platform_id: parseInt(platform_id)
+        });
+    
+        if (!updatedLink) {
+            res.status(404).json({ error: "link not found" });
+        }
+    
+        res.status(200).json(updatedLink);
+    }
+    
+    async deleteLinkGameToPlatformById(req: Request, res: Response) {
+        const { game_platformId } = req.params;
+    
+        const deletedLink = await this.gameRepository.deleteLinkGameToPlatformById(parseInt(game_platformId));
+    
+        if (!deletedLink) {
+            res.status(404).json({ error: "link not found" });
+        }
+    
+        res.status(200).json({ message: "game deleted successfully" });
     }
 
 }

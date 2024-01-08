@@ -36,14 +36,18 @@ api.use(express.json())
 console.log("Registering games routes")
 api.get("/game", gameController.listGames.bind(gameController))
 api.post("/game", gameController.addGame.bind(gameController))
-api.post("/game/platform/link", gameController.linkGameToPlatform.bind(gameController))
 api.get("/game/:gameId", gameController.getGame.bind(gameController))
 api.get("/game/genre/:genreId", gameController.getGameByGenre.bind(gameController))
 api.get("/game/company/:companyId", gameController.getGameByCompany.bind(gameController))
 api.get("/game/:genreId/:companyId", gameController.getGamesByGenreAndCompany.bind(gameController))
-api.get("/game/platform/link/:platformId", gameController.getGamesByPlatform.bind(gameController))
 api.put("/game/:gameId", gameController.updateGame.bind(gameController))
 api.delete("/game/:gameId", gameController.deleteGame.bind(gameController))
+
+//LinkGameToPlatform
+api.post("/game/platform/link", gameController.linkGameToPlatform.bind(gameController))
+api.get("/game/platform/link/:platformId", gameController.getGamesByPlatform.bind(gameController))
+api.put("/game/platform/link/:game_platformId", gameController.updateLinkGameToPlatformById.bind(gameController));
+api.delete("/game/platform/link/:game_platformId", gameController.deleteLinkGameToPlatformById.bind(gameController));
 
 console.log("Registering genre routes")
 api.get("/genre", genreController.listGenres.bind(genreController))
