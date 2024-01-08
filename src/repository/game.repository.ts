@@ -82,21 +82,6 @@ export class GameRepository{
         }))
     }
 
-    async getGamesByPlatformId(platformId: number): Promise<Game[]> {
-        const records = await this.db.all(
-            "SELECT * FROM game JOIN game_platform ON game.id_game = game_platform.game_id WHERE game_platform.platform_id = ?", platformId)
-    
-        return records.map((record): Game => ({
-            id_game: record.id_game,
-            name: record.name,
-            release_date: record.release_date,
-            rating: record.rating,
-            genre_id: record.genre_id,
-            company_id: record.company_id
-        }))
-    }
-
-
     async addGame(name: string, release_date: Date, rating: number, genre_id: number, company_id: number): Promise<number> {
         const result = await this.db.run(
             "INSERT INTO game(name, release_date, rating, genre_id, company_id) VALUES (?,?,?,?,?)",
@@ -108,14 +93,6 @@ export class GameRepository{
         )
 
         return result.lastID
-    }
-
-    async linkGameToPlatform(gamePlatform: GamePlatform): Promise<void> {
-        await this.db.run(
-            "INSERT INTO game_platform(game_id, platform_id) VALUES (?, ?)",
-            gamePlatform.game_id,
-            gamePlatform.platform_id
-        );
     }
 
     async updateGameById(id_game: number, name: string, release_date: Date, rating: number, genre_id: number, company_id: number): Promise<Game> {
@@ -154,4 +131,70 @@ export class GameRepository{
 
         return gameToDelete
     }
+
+    async linkGameToPlatform(gamePlatform: GamePlatform): Promise<void> {
+        await this.db.run(
+            "INSERT INTO game_platform(game_id, platform_id) VALUES (?, ?)",
+            gamePlatform.game_id,
+            gamePlatform.platform_id
+        )
+    }
+
+    async getGamesByPlatformId(platformId: number): Promise<Game[]> {
+        const records = await this.db.all(
+            "SELECT * FROM game JOIN game_platform ON game.id_game = game_platform.game_id WHERE game_platform.platform_id = ?", platformId)
+    
+        return records.map((record): Game => ({
+            id_game: record.id_game,
+            name: record.name,
+            release_date: record.release_date,
+            rating: record.rating,
+            genre_id: record.genre_id,
+            company_id: record.company_id
+        }))
+    }
+
+    async updateLinkGameToPlatformById(gamePlatform: GamePlatform): Promise<GamePlatform> {
+        const { game_id, platform_id, id_game_platform } = gamePlatform;
+
+        const result = await this.db.run(
+            "UPDATE game_platform SET game_id=?, platform_id=? WHERE id_game_platform=?",
+            game_id,
+            platform_id,
+            id_game_platform
+        );
+
+        if (result.changes === 0) {
+            return null;
+        }
+
+        return gamePlatform;
+    }
+
+    async deleteLinkGameToPlatformById(id_game_platform: number): Promise<GamePlatform> {
+        const linkToDelete = await this.getLinkGameToPlatformById(id_game_platform);
+
+        if (!linkToDelete) {
+            return null;
+        }
+
+        await this.db.run("DELETE FROM game_platform WHERE id_game_platform=?", id_game_platform);
+
+        return linkToDelete;
+    }
+
+    async getLinkGameToPlatformById(id_game_platform: number): Promise<GamePlatform> {
+        const row = await this.db.get("SELECT * FROM game_platform WHERE id_game_platform = ?", id_game_platform);
+
+        if (!row) {
+            return null;
+        }
+
+        return {
+            id_game_platform: row.id_game_platform,
+            game_id: row.game_id,
+            platform_id: row.platform_id
+        };
+    }
+
 }
