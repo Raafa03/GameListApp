@@ -1,5 +1,5 @@
 import express, {Express} from "express"
-
+import cors from "cors";
 import { GameController } from "./controller/game.controller.js"
 import { GameRepository } from "./repository/game.repository.js"
 import database from "./persistence/database.js"
@@ -30,6 +30,7 @@ const platformController = new PlatformController(platformRepository)
 
 console.log("Configuring express")
 const api: Express = express()
+api.use(cors());
 const port = 3000
 api.use(express.json())
 
@@ -43,11 +44,6 @@ api.get("/game/:genreId/:companyId", gameController.getGamesByGenreAndCompany.bi
 api.put("/game/:gameId", gameController.updateGame.bind(gameController))
 api.delete("/game/:gameId", gameController.deleteGame.bind(gameController))
 
-//LinkGameToPlatform
-api.post("/game/platform/link", gameController.linkGameToPlatform.bind(gameController))
-api.get("/game/platform/link/:platformId", gameController.getGamesByPlatform.bind(gameController))
-api.put("/game/platform/link/:game_platformId", gameController.updateLinkGameToPlatformById.bind(gameController));
-api.delete("/game/platform/link/:game_platformId", gameController.deleteLinkGameToPlatformById.bind(gameController));
 
 console.log("Registering genre routes")
 api.get("/genre", genreController.listGenres.bind(genreController))
@@ -69,6 +65,12 @@ api.post("/platform", platformController.addPlatform.bind(platformController))
 api.get("/platform/:platformId", platformController.getPlatform.bind(platformController))
 api.put("/platform/:platformId", platformController.updatePlatform.bind(platformController))
 api.delete("/platform/:platformId", platformController.deletePlatform.bind(platformController))
+
+console.log("Registering LinkGameToPlatform routes")
+api.post("/game/platform/link", gameController.linkGameToPlatform.bind(gameController))
+api.get("/game/platform/link/:platformId", gameController.getGamesByPlatform.bind(gameController))
+api.put("/game/platform/link/:game_platformId", gameController.updateLinkGameToPlatformById.bind(gameController));
+api.delete("/game/platform/link/:game_platformId", gameController.deleteLinkGameToPlatformById.bind(gameController));
 
 
 

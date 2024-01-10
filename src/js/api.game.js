@@ -5,7 +5,7 @@ class GameApi {
    * @returns {Promise<Game[]>}
    */
   async find() {
-    return (await fetch(`/game`)).json();
+    return (await fetch(`http://localhost:3000/game`)).json();
   }
 
   /**
@@ -14,7 +14,7 @@ class GameApi {
    * @returns {Promise<Game>}
    */
   async get(id_game) {
-    return (await fetch(`/game/${id_game}`)).json()
+    return (await fetch(`http://localhost:3000/game${id_game}`)).json()
   }
 
   /**
@@ -23,7 +23,7 @@ class GameApi {
    * @returns {Promise<Game>}
    */
   async update(id_game, value) {
-    const req = fetch(`/game/${id_game}`, {
+    const req = fetch(`http://localhost:3000/game${id_game}`, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json"
@@ -35,7 +35,7 @@ class GameApi {
   }
 
   async create(value) {
-    const req = fetch(`/game`, {
+    const req = fetch(`http://localhost:3000/game`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
