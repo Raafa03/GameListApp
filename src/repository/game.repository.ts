@@ -127,9 +127,18 @@ export class GameRepository{
             id_game
         )
 
+        console.log(id_game,
+            name,
+            release_date,
+            rating,
+            genre_id,
+            company_id,
+            platform_id)
+
         if (result.changes === 0) {
-            return null
+            return null      
         }
+       
 
         return {
             id_game,
@@ -140,6 +149,7 @@ export class GameRepository{
             company_id,
             platform_id
         }
+        
     }
 
     async deleteGameById(id: number): Promise<Game> {

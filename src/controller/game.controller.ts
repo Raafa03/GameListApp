@@ -83,17 +83,18 @@ export class GameController{
 
     async updateGame(req: Request, res: Response) {
         const { gameId } = req.params
-        const { name, release_date, rating, genre_id, company_id , platform_id} = req.body
+        const { editName, editReleaseDate, editRating, editGenre, editCompany, editPlatform} = req.body
 
         const updatedGame = await this.gameRepository.updateGameById(
             parseInt(gameId),
-            name,
-            release_date,
-            rating,
-            genre_id,
-            company_id,
-            platform_id
+            editName,
+            editReleaseDate,
+            editRating,
+            editGenre,
+            editCompany,
+            editPlatform
         )
+        console.log(req.body,req.params)
 
         if (!updatedGame) {
             res.status(404).json({ error: "game not found" })
