@@ -1,4 +1,4 @@
-<!-- edit.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +10,10 @@
 </head>
 <body>
     <h1>Editar Jogo</h1>
+
+    <a href="index.html">
+        <button id="HomeButton">Home</button>
+    </a>
 
     <form id="editForm">
         <label for="editName">Nome:</label>
@@ -23,20 +27,20 @@
 
         <label for="editGenre">Gênero:</label>
         <select id="editGenre" name="editGenre" required>
-            <!-- Options serão preenchidas dinamicamente com JavaScript -->
+            
         </select>
 
         <label for="editCompany">Empresa:</label>
         <select id="editCompany" name="editCompany" required>
-            <!-- Options serão preenchidas dinamicamente com JavaScript -->
+            
         </select>
 
         <label for="editPlatform">Plataforma:</label>
         <select id="editPlatform" name="editPlatform" required>
-            <!-- Options serão preenchidas dinamicamente com JavaScript -->
+            
         </select>
 
-        <button type="button" onclick="updateGame()">Atualizar Jogo</button>
+        <button type="button" id = "updateGameButton"onclick="updateGame()">Atualizar Jogo</button>
     </form>
     <script src="../public/js/edit.js"></script>
 </body>

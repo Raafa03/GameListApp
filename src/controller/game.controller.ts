@@ -15,7 +15,7 @@ export class GameController{
         const { platformId } = req.params
         const games = await this.gameRepository.getGames()
         res.status(200).json(games)
-        console.log(req.params)
+        
     }
 
     async getGame(req: Request, res: Response){
@@ -80,7 +80,7 @@ export class GameController{
         const id = await this.gameRepository.addGame(name, release_date, rating, genre_desc, company_desc, platform_desc)
         res.status(201).json({id:id})
 
-        console.log(req.body)
+        
     }
 
 
@@ -97,7 +97,7 @@ export class GameController{
             editCompany,
             editPlatform
         )
-        console.log(req.body,req.params)
+        
 
         if (!updatedGame) {
             res.status(404).json({ error: "game not found" })
