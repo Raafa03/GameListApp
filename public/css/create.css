@@ -35,16 +35,6 @@ select {
     width: 100%;
 }
 
-#createGameButton {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-}
-
 #HomeButton{
     background-color: red;
     color: white;

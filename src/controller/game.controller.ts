@@ -15,7 +15,7 @@ export class GameController{
         const { platformId } = req.params
         const games = await this.gameRepository.getGames()
         res.status(200).json(games)
-        console.log(req.params)
+        
     }
 
     async getGame(req: Request, res: Response){
