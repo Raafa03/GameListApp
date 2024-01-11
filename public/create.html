@@ -4,44 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Jogo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input,
-        select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" text="text/css" href="css/create.css">   
 </head>
 <body>
     <h1>Criar Jogo</h1>
@@ -58,88 +21,22 @@
 
         <label for="genre_desc">Gênero:</label>
         <select id="genre_desc" name="genre_desc" required>
-            <option value=""></option> <!-- Opção vazia -->
-            <option value="Ação">Ação</option>
-            <option value="Aventura">Aventura</option>
-            <!-- Adicione mais opções conforme necessário -->
+            
         </select>
 
         <label for="company_desc">Empresa:</label>
         <select id="company_desc" name="company_desc" required>
-            <option value=""></option> <!-- Opção vazia -->
-            <option value="EA Sports">EA Sports</option>
-            <option value="Ubisoft">Ubisoft</option>
-            <!-- Adicione mais opções conforme necessário -->
+            
         </select>
 
         <label for="platform_desc">Plataforma:</label>
         <select id="platform_desc" name="platform_desc" required>
-            <option value=""></option> <!-- Opção vazia -->
-            <option value="PlayStation">PlayStation</option>
-            <option value="Xbox">Xbox</option>
-            <option value="PC">PC</option>
-            <!-- Adicione mais opções conforme necessário -->
+            
         </select>
 
         <button type="button" onclick="createGame()">Criar Jogo</button>
     </form>
 
-    <script>
-        async function createGame() {
-            const gameForm = document.getElementById('gameForm');
-            const formData = new FormData(gameForm);
-    
-            // Mapeamento de nomes para IDs
-            const genreNameToId = {
-                'Ação': 1,
-                'Aventura': 2,
-                // Adicione mais mapeamentos conforme necessário
-            };
-    
-            const companyNameToId = {
-                'EA Sports': 1,
-                'Ubisoft': 2,
-                // Adicione mais mapeamentos conforme necessário
-            };
-    
-            const platformNameToId = {
-                'PlayStation': 1,
-                'Xbox': 2,
-                'PC': 3,
-                // Adicione mais mapeamentos conforme necessário
-            };
-    
-            try {
-                // Converte os nomes fornecidos para IDs
-                formData.set('genre_id', genreNameToId[formData.get('genre_desc')] || '');
-                formData.set('company_id', companyNameToId[formData.get('company_desc')] || '');
-                formData.set('platform_id', platformNameToId[formData.get('platform_desc')] || '');
-    
-                // Criar um objeto JavaScript com os dados do formulário
-                const formDataObject = {};
-                formData.forEach((value, key) => {
-                    formDataObject[key] = value;
-                });
-    
-                const response = await fetch('http://localhost:3000/game', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formDataObject),
-                });
-    
-                if (response.ok) {
-                    alert('Jogo criado com sucesso!');
-                    window.location.href = 'index.html';
-                    
-                } else {
-                    alert('Erro ao criar jogo: ' + response.statusText);
-                }
-            } catch (error) {
-                alert('Erro ao criar jogo: ' + error.message);
-            }
-        }
-    </script>
+    <script src="../public/js/create.js"></script>
 </body>
 </html>

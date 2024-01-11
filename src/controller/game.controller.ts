@@ -15,6 +15,7 @@ export class GameController{
         const { platformId } = req.params
         const games = await this.gameRepository.getGames()
         res.status(200).json(games)
+        console.log(req.params)
     }
 
     async getGame(req: Request, res: Response){
@@ -75,9 +76,11 @@ export class GameController{
     
 
     async addGame(req: Request, res: Response){
-        const {name, release_date, rating, genre_id, company_id,platform_id} = req.body
-        const id = await this.gameRepository.addGame(name, release_date, rating, genre_id, company_id, platform_id)
+        const {name, release_date, rating, genre_desc, company_desc,platform_desc} = req.body
+        const id = await this.gameRepository.addGame(name, release_date, rating, genre_desc, company_desc, platform_desc)
         res.status(201).json({id:id})
+
+        console.log(req.body)
     }
 
 

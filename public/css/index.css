@@ -1,0 +1,20 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#gameList {
+    list-style: none;
+    padding: 0;
+}
+
+.gameItem {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
