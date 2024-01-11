@@ -9,6 +9,10 @@
 <body>
     <h1>Criar Jogo</h1>
 
+    <a href="index.html">
+        <button id="HomeButton">Home</button>
+    </a>
+
     <form id="gameForm">
         <label for="name">Nome:</label>
         <input type="text" id="name" name="name" required>
@@ -34,7 +38,7 @@
             
         </select>
 
-        <button type="button" onclick="createGame()">Criar Jogo</button>
+        <button id="createGameButton" type="button" onclick="createGame()">Criar Jogo</button>
     </form>
 
     <script src="../public/js/create.js"></script>

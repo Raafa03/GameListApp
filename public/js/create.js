@@ -68,15 +68,15 @@ async function createGame() {
         
         if (response.ok) {
             // Jogo atualizado com sucesso - exibir pop-up
-            alert('Jogo atualizado com sucesso!');
+            alert('Jogo adicionado com sucesso!');
             // Redirecionar para a página de lista de jogos ou realizar outras ações necessárias
             window.location.href = 'index.html';
         } else {
             // Exibir mensagem de erro em pop-up
-            alert('Erro ao atualizar jogo: ' + response.statusText);
+            alert('Erro ao adicionar jogo: ' + response.statusText);
         }
     } catch (error) {
         // Exibir mensagem de erro em pop-up
-        alert('Erro ao atualizar jogo: ' + error.message);
+        alert('Erro ao adicionar jogo: ' + error.message);
     }
 }
