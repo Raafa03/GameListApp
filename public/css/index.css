@@ -1,10 +1,29 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 20px;
+    background-color: #121212;
+    color: #ffffff;
 }
 
 h1 {
     text-align: center;
+    color: #303f9f;
+}
+
+label, select {
+    margin: 10px 0;
+    margin-right: 25px;
+    align-content: center;
+}
+
+select.custom-dropdown {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #303f9f;
+    border-radius: 5px;
+    background-color: #2E2E2E; /* Dark Gray */
+    color: #ffffff;
+    font-size: 16px;
 }
 
 #gameList {
@@ -13,8 +32,61 @@ h1 {
 }
 
 .gameItem {
-    border: 1px solid black;
+    background-color: #2E2E2E; /* Dark Gray */
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.05);
     margin: 10px;
-    padding: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #222222;
+}
+
+.gameItem strong {
+    display: block;
+    margin-bottom: 10px;
+    color: #56F0FF;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #111111;
+}
+
+.gameItem button {
+    background: linear-gradient(45deg, #FF40FF, #FF73FF); 
+    color: #121212; 
+    padding: 9px;
+    border: none;
     border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.9em; 
+    letter-spacing: 1px; 
+    transition: background 0.3s, color 0.3s;
+}
+
+.gameItem button:hover {
+    background: linear-gradient(45deg, #FF73FF, #FF40FF);
+    color: #121212;
+}
+
+.gameItem:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 12px rgba(255, 255, 255, 0.1);
+}
+
+#AddGameButton {
+    background: linear-gradient(45deg, #303f9f, #2f72a9);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+    margin: 10px;
+    transition: background 0.3s;
+}
+
+#AddGameButton:hover {
+    background: linear-gradient(45deg, #2f72a9, #303f9f);
 }

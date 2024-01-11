@@ -10,13 +10,31 @@
     <h1>Lista de Jogos</h1>
 
     <a href="create.html">
-        <button>Adicionar Jogo</button>
+        <button id="AddGameButton" class="custom-button" href="create.html">Adicionar Jogo</button>
     </a>
+
+    <label for="genreDropdown"></label>
+    <select id="genreDropdown" class="custom-dropdown">
+        <!-- As opções serão preenchidas dinamicamente pelo JavaScript -->
+    </select>
+
+    <label for="companyDropdown"></label>
+    <select id="companyDropdown" class="custom-dropdown">
+        <!-- As opções serão preenchidas dinamicamente pelo JavaScript -->
+    </select>
+
+    <label for="platformDropdown"></label>
+    <select id="platformDropdown" class="custom-dropdown">
+        <!-- As opções serão preenchidas dinamicamente pelo JavaScript -->
+    </select>
 
     <ul id="gameList"></ul>
 
     <script src="../public/js/index.js"></script>
     <script src="../public/js/delete.js"></script>
+    <script src="../public/js/genre.js"></script>
+    <script src="../public/js/company.js"></script>
+    <script src="../public/js/platform.js"></script>
 
 </body>
 </html>
