@@ -9,6 +9,7 @@ import { CompanyController } from "./controller/company.controller.js"
 import { CompanyRepository } from "./repository/company.repository.js"
 import { PlatformController } from "./controller/platform.controller.js"
 import { PlatformRepository } from "./repository/platform.repository.js"
+import cors from "cors"
 
 console.log("Connecting to database")
 const db = await database.connectDatabase()
@@ -30,6 +31,7 @@ const platformController = new PlatformController(platformRepository)
 
 console.log("Configuring express")
 const api: Express = express()
+api.use(cors())
 const port = 3000
 api.use(express.json())
 
@@ -39,15 +41,10 @@ api.post("/game", gameController.addGame.bind(gameController))
 api.get("/game/:gameId", gameController.getGame.bind(gameController))
 api.get("/game/genre/:genreId", gameController.getGameByGenre.bind(gameController))
 api.get("/game/company/:companyId", gameController.getGameByCompany.bind(gameController))
+api.get("/game/platform/:platformId", gameController.getGamesByPlatform.bind(gameController))
 api.get("/game/:genreId/:companyId", gameController.getGamesByGenreAndCompany.bind(gameController))
 api.put("/game/:gameId", gameController.updateGame.bind(gameController))
 api.delete("/game/:gameId", gameController.deleteGame.bind(gameController))
-
-//LinkGameToPlatform
-api.post("/game/platform/link", gameController.linkGameToPlatform.bind(gameController))
-api.get("/game/platform/link/:platformId", gameController.getGamesByPlatform.bind(gameController))
-api.put("/game/platform/link/:game_platformId", gameController.updateLinkGameToPlatformById.bind(gameController));
-api.delete("/game/platform/link/:game_platformId", gameController.deleteLinkGameToPlatformById.bind(gameController));
 
 console.log("Registering genre routes")
 api.get("/genre", genreController.listGenres.bind(genreController))

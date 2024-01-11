@@ -5,4 +5,5 @@ export interface Game {
     rating: number
     genre_id: number
     company_id: number
+    platform_id: number
 }

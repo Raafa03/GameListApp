@@ -1,0 +1,43 @@
+<!-- edit.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Jogo</title>
+    <link rel="stylesheet" text="text/css" href="css/edit.css">   
+    
+</head>
+<body>
+    <h1>Editar Jogo</h1>
+
+    <form id="editForm">
+        <label for="editName">Nome:</label>
+        <input type="text" id="editName" name="editName" required>
+
+        <label for="editReleaseDate">Data de Lançamento:</label>
+        <input type="date" id="editReleaseDate" name="editReleaseDate" required>
+
+        <label for="editRating">Avaliação:</label>
+        <input type="number" id="editRating" name="editRating" step="0.1" required>
+
+        <label for="editGenre">Gênero:</label>
+        <select id="editGenre" name="editGenre" required>
+            <!-- Options serão preenchidas dinamicamente com JavaScript -->
+        </select>
+
+        <label for="editCompany">Empresa:</label>
+        <select id="editCompany" name="editCompany" required>
+            <!-- Options serão preenchidas dinamicamente com JavaScript -->
+        </select>
+
+        <label for="editPlatform">Plataforma:</label>
+        <select id="editPlatform" name="editPlatform" required>
+            <!-- Options serão preenchidas dinamicamente com JavaScript -->
+        </select>
+
+        <button type="button" onclick="updateGame()">Atualizar Jogo</button>
+    </form>
+    <script src="../public/js/edit.js"></script>
+</body>
+</html>

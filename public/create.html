@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Jogo</title>
+    <link rel="stylesheet" text="text/css" href="css/create.css">   
+</head>
+<body>
+    <h1>Criar Jogo</h1>
+
+    <form id="gameForm">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="release_date">Data de Lançamento:</label>
+        <input type="date" id="release_date" name="release_date" required>
+
+        <label for="rating">Avaliação:</label>
+        <input type="number" id="rating" name="rating" step="0.1" required>
+
+        <label for="genre_desc">Gênero:</label>
+        <select id="genre_desc" name="genre_desc" required>
+            
+        </select>
+
+        <label for="company_desc">Empresa:</label>
+        <select id="company_desc" name="company_desc" required>
+            
+        </select>
+
+        <label for="platform_desc">Plataforma:</label>
+        <select id="platform_desc" name="platform_desc" required>
+            
+        </select>
+
+        <button type="button" onclick="createGame()">Criar Jogo</button>
+    </form>
+
+    <script src="../public/js/create.js"></script>
+</body>
+</html>
