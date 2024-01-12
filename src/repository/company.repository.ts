@@ -1,5 +1,5 @@
-import { Database } from "sqlite";
-import { Company } from "../model/company.model.js";
+import { Database } from "sqlite"
+import { Company } from "../model/company.model.js"
 
 export class CompanyRepository {
 
@@ -46,7 +46,7 @@ export class CompanyRepository {
             "UPDATE company SET company_desc=? WHERE id_company=?",
             company_desc,
             id_company
-        );
+        )
 
         if (result.changes === 0) {
             return null
@@ -55,18 +55,18 @@ export class CompanyRepository {
         return {
             id_company,
             company_desc
-        };
+        }
     }
 
     async deleteCompanyById(id_company: number): Promise<Company> {
         const companyToDelete = await this.getCompanyById(id_company)
 
         if (!companyToDelete) {
-            return null; 
+            return null 
         }
 
         await this.db.run("DELETE FROM company WHERE id_company=?", id_company)
 
-        return companyToDelete;
+        return companyToDelete
     }
 }

@@ -1,101 +1,97 @@
-// Função para preencher uma dropdown com opções
 function fillDropdown(dropdownId, options) {
-    const dropdown = document.getElementById(dropdownId);
+    const dropdown = document.getElementById(dropdownId)
 
-    // Limpar opções existentes
-    dropdown.innerHTML = '';
+    // Limpar as opções 
+    dropdown.innerHTML = ''
 
     // Adicionar opção vazia
-    const emptyOption = document.createElement('option');
-    emptyOption.value = '';
-    emptyOption.textContent = '';
-    dropdown.appendChild(emptyOption);
+    const emptyOption = document.createElement('option')
+    emptyOption.value = ''
+    emptyOption.textContent = ''
+    dropdown.appendChild(emptyOption)
 
     // Preencher as opções
     options.forEach(option => {
-        const optionElement = document.createElement('option');
-        optionElement.value = option.id_genre || option.id_company || option.id_platform;
-        optionElement.textContent = option.genre_desc || option.company_desc || option.platform_desc;
-        dropdown.appendChild(optionElement);
-    });
+        const optionElement = document.createElement('option')
+        optionElement.value = option.id_genre || option.id_company || option.id_platform
+        optionElement.textContent = option.genre_desc || option.company_desc || option.platform_desc
+        dropdown.appendChild(optionElement)
+    })
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
     try {
-        // Carregar dados de gênero, empresa e plataforma
+        // Carregar dados 
         const [genres, companies, platforms] = await Promise.all([
             fetch('http://localhost:3000/genre').then(response => response.json()),
             fetch('http://localhost:3000/company').then(response => response.json()),
             fetch('http://localhost:3000/platform').then(response => response.json())
-        ]);
+        ])
 
-        // Preencher as dropdowns com as opções
-        fillDropdown('genre_desc', genres);
-        fillDropdown('company_desc', companies);
-        fillDropdown('platform_desc', platforms);
+        // Preencher as dropdowns
+        fillDropdown('genre_desc', genres)
+        fillDropdown('company_desc', companies)
+        fillDropdown('platform_desc', platforms)
 
     } catch (error) {
-        console.error('Error loading data:', error);
+        console.error('Error loading data:', error)
     }
-});
+})
 
-// Função para validar o formulário
+// Validação do form
 function validateForm(formDataObject) {
     for (const key in formDataObject) {
         if (!formDataObject[key]) {
-            alert(`Please, fill all the fields! The field "${key}" can't be empty`);
-            return false;
+            alert(`Please, fill all the fields! The field "${key}" can't be empty`)
+            return false
         }
 
-         // Adicionando verificação para o campo 'rating'
+         // Validação do rating
          if (key === 'rating') {
-            const rating = parseFloat(formDataObject[key]);
+            const rating = parseFloat(formDataObject[key])
             if ( rating < 0 || rating > 10) {
-                alert('Please insert a valid rating between 0 and 10');
-                return false;
+                alert('Please insert a valid rating between 0 and 10')
+                return false
             }
         }
     }
-    return true;
+    return true
 }
 
-// Função para atualizar o jogo
+// Atualizar o jogo
 async function createGame() {
-    const gameId = new URLSearchParams(window.location.search).get('id');
-    const gameForm = document.getElementById('gameForm');
-    const formData = new FormData(gameForm);
+    const gameId = new URLSearchParams(window.location.search).get('id')
+    const gameForm = document.getElementById('gameForm')
+    const formData = new FormData(gameForm)
 
-    // Criar um objeto JavaScript com os dados do formulário
-    const formDataObject = {};
+    // Criar um objeto JS com os dados do form
+    const formDataObject = {}
     formData.forEach((value, key) => {
-        formDataObject[key] = value;
-    });
+        formDataObject[key] = value
+    })
 
-    // Validar o formulário
+    // Validar o form
     if (!validateForm(formDataObject)) {
-        return;
+        return
     }
 
     try {
+
         const response = await fetch(`http://localhost:3000/game`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(formDataObject),
-        });
+        })
 
         if (response.ok) {
-            // Jogo atualizado com sucesso - exibir pop-up
-            alert('Jogo adicionado com sucesso!');
-            // Redirecionar para a página de lista de jogos ou realizar outras ações necessárias
-            window.location.href = 'index.html';
+            alert('Game added !')
+            window.location.href = 'index.html'
         } else {
-            // Exibir mensagem de erro em pop-up
-            alert('Erro ao adicionar jogo: ' + response.statusText);
+            alert('Error adding game' + response.statusText)
         }
     } catch (error) {
-        // Exibir mensagem de erro em pop-up
-        alert('Erro ao adicionar jogo: ' + error.message);
+        alert('Error adding game' + error.message)
     }
 }

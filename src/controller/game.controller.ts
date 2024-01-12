@@ -97,7 +97,7 @@ export class GameController{
     }
 
     async getGamesByPlatform(req: Request, res: Response) {
-        const { platformId } = req.params;
+        const { platformId } = req.params
         const games = await this.gameRepository.getGamesByPlatformId(parseInt(platformId))
     
         if (games.length === 0) {

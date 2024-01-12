@@ -1,5 +1,5 @@
-import { Database } from "sqlite";
-import { Genre } from "../model/genre.model.js";
+import { Database } from "sqlite"
+import { Genre } from "../model/genre.model.js"
 
 export class GenreRepository {
 
@@ -46,7 +46,7 @@ export class GenreRepository {
             "UPDATE genre SET genre_desc=? WHERE id_genre=?",
             genre_desc,
             id_genre
-        );
+        )
 
         if (result.changes === 0) {
             return null
@@ -55,18 +55,18 @@ export class GenreRepository {
         return {
             id_genre,
             genre_desc
-        };
+        }
     }
 
     async deleteGenreById(id_genre: number): Promise<Genre> {
         const genreToDelete = await this.getGenreById(id_genre)
 
         if (!genreToDelete) {
-            return null; 
+            return null 
         }
 
         await this.db.run("DELETE FROM genre WHERE id_genre=?", id_genre)
 
-        return genreToDelete;
+        return genreToDelete
     }
 }

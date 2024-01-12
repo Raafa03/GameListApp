@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import { GenreRepository } from "../repository/genre.repository.js";
+import { Request, Response } from "express"
+import { GenreRepository } from "../repository/genre.repository.js"
 
 export class GenreController {
 
@@ -40,24 +40,24 @@ export class GenreController {
         const updatedGenre = await this.genreRepository.updateGenreById(
             parseInt(genreId),
             genre_desc
-        );
+        )
 
         if (!updatedGenre) {
-            res.status(404).json({ error: "genre not found" });
+            res.status(404).json({ error: "genre not found" })
         }
 
-        res.status(200).json(updatedGenre);
+        res.status(200).json(updatedGenre)
     }
 
     async deleteGenre(req: Request, res: Response) {
-        const { genreId } = req.params;
+        const { genreId } = req.params
 
-        const deletedGenre = await this.genreRepository.deleteGenreById(parseInt(genreId));
+        const deletedGenre = await this.genreRepository.deleteGenreById(parseInt(genreId))
 
         if (!deletedGenre) {
-            res.status(404).json({ error: "genre not found" });
+            res.status(404).json({ error: "genre not found" })
         }
 
-        res.status(200).json({ message: "genre deleted successfully" });
+        res.status(200).json({ message: "genre deleted successfully" })
     }
 }
