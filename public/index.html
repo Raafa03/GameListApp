@@ -29,12 +29,13 @@
     <!-- Adicionando o seletor de opções de ordenação -->
     <label for="sortOption">Order By:</label>
     <select id="sortOption" onchange="loadGames()">
+        <option></option>
         <option value="nameAsc"> A - Z</option>
         <option value="nameDesc"> Z- A </option>
-        <option value="releaseDateDesc">Data de Lançamento (Mais recente primeiro)</option>
-        <option value="releaseDateAsc">Data de Lançamento (Mais antigo primeiro)</option>
-        <option value="ratingDesc">Rating (Mais alto primeiro)</option>
-        <option value="ratingAsc">Rating (Mais baixo primeiro)</option>
+        <option value="releaseDateDesc">Release Date (Newest)</option>
+        <option value="releaseDateAsc">Release Date (Oldest)</option>
+        <option value="ratingDesc">Rating (Higher)</option>
+        <option value="ratingAsc">Rating (Lower)</option>
     </select>
 
     <ul id="gameList"></ul>
@@ -42,9 +43,9 @@
     <!-- Modal para confirmação de exclusão -->
     <div id="confirmationModal" class="modal">
         <div class="modal-content">
-            <p>Tem certeza de que deseja excluir este jogo?</p>
-            <button id="confirmDelete">Sim</button>
-            <button id="cancelDelete">Cancelar</button>
+            <p>Do you really wish to delete this game ?</p>
+            <button id="confirmDelete">Yes</button>
+            <button id="cancelDelete">Cancel</button>
         </div>
     </div>
 

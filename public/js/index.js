@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const gameList = document.getElementById('gameList');
     const sortOptionSelect = document.getElementById('sortOption');
+    const genreDropdown = document.getElementById('genreDropdown');
+    const companyDropdown = document.getElementById('companyDropdown');
+    const platformDropdown = document.getElementById('platformDropdown');
+
+    // Armazena os filtros selecionados
+    let selectedGenreId = genreDropdown.value;
+    let selectedCompanyId = companyDropdown.value;
+    let selectedPlatformId = platformDropdown.value;
 
     // Função para carregar a lista de jogos
     async function loadGames() {
@@ -11,6 +19,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                 fetch('http://localhost:3000/company').then(response => response.json()),
                 fetch('http://localhost:3000/platform').then(response => response.json())
             ]);
+
+            // Atualiza os filtros com os valores atuais
+            selectedGenreId = genreDropdown.value;
+            selectedCompanyId = companyDropdown.value;
+            selectedPlatformId = platformDropdown.value;
 
             // Ordena os jogos de acordo com a opção selecionada
             const sortOption = sortOptionSelect.value;
@@ -36,20 +49,27 @@ document.addEventListener('DOMContentLoaded', async function () {
             gameList.innerHTML = '';
 
             gamesResponse.forEach(game => {
-                const listItem = document.createElement('li');
-                listItem.className = 'gameItem';
-            
-                listItem.innerHTML = `
-                    <strong>${game.name}</strong><br>
-                    Release Date: ${game.release_date}<br>
-                    Rating: ${game.rating}<br>
-                    Genre: ${game.genre_id ? genreResponse.find(genre => genre.id_genre === game.genre_id).genre_desc : 'N/A'}<br>
-                    Company: ${game.company_id ? companyResponse.find(company => company.id_company === game.company_id).company_desc : 'N/A'}<br>
-                    Platform: ${game.platform_id ? platformResponse.find(platform => platform.id_platform === game.platform_id).platform_desc : 'N/A'}<br>
-                    <button id="deleteGameButton" onclick="deleteGame(${game.id_game})">Delete</button>
-                    <button id="editGameButton" onclick="editGame(${game.id_game})">Edit</button>
-                `;
-                gameList.appendChild(listItem);
+                const genreMatch = !selectedGenreId || parseInt(game.genre_id) === parseInt(selectedGenreId);
+                const companyMatch = !selectedCompanyId || parseInt(game.company_id) === parseInt(selectedCompanyId);
+                const platformMatch = !selectedPlatformId || parseInt(game.platform_id) === parseInt(selectedPlatformId);
+
+                if (genreMatch && companyMatch && platformMatch) {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'gameItem';
+
+                    listItem.innerHTML = `
+                        <strong>${game.name}</strong><br>
+                        Release Date: ${game.release_date}<br>
+                        Rating: ${game.rating}<br>
+                        Genre: ${game.genre_id ? genreResponse.find(genre => genre.id_genre === game.genre_id).genre_desc : 'N/A'}<br>
+                        Company: ${game.company_id ? companyResponse.find(company => company.id_company === game.company_id).company_desc : 'N/A'}<br>
+                        Platform: ${game.platform_id ? platformResponse.find(platform => platform.id_platform === game.platform_id).platform_desc : 'N/A'}<br>
+                        <button id="deleteGameButton" onclick="deleteGame(${game.id_game})">Delete</button>
+                        <button id="editGameButton" onclick="editGame(${game.id_game})">Edit</button>
+                    `;
+
+                    gameList.appendChild(listItem);
+                }
             });
 
         } catch (error) {
@@ -63,8 +83,3 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Adiciona um ouvinte de evento para recarregar os jogos quando a opção de ordenação muda
     sortOptionSelect.addEventListener('change', loadGames);
 });
-
-function editGame(gameId) {
-    // Redirecione para a página de edição com o ID do jogo
-    window.location.href = `edit.html?id=${gameId}`;
-}
