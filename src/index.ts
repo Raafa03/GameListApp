@@ -43,6 +43,9 @@ api.get("/game/genre/:genreId", gameController.getGameByGenre.bind(gameControlle
 api.get("/game/company/:companyId", gameController.getGameByCompany.bind(gameController))
 api.get("/game/platform/:platformId", gameController.getGamesByPlatform.bind(gameController))
 api.get("/game/:genreId/:companyId", gameController.getGamesByGenreAndCompany.bind(gameController))
+api.get("/game/:genreId/:platformId", gameController.getGamesByGenreAndPlatform.bind(gameController))
+api.get("/game/:companyId/:platformId", gameController.getGamesByGenreAndCompany.bind(gameController))
+api.get("/game/:genreId/:companyId/:platformId", gameController.getGamesByGenreCompanyAndPlatform.bind(gameController))
 api.put("/game/:gameId", gameController.updateGame.bind(gameController))
 api.delete("/game/:gameId", gameController.deleteGame.bind(gameController))
 

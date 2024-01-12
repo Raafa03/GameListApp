@@ -2,34 +2,25 @@ class GenrePage {
     constructor() {
         this.gameList = document.getElementById('gameList');
         this.genreDropdown = document.getElementById('genreDropdown');
-        // Mapeamento de IDs de gênero para seus respectivos nomes
+        this.companyDropdown = document.getElementById('companyDropdown');
+        this.platformDropdown = document.getElementById('platformDropdown');
         this.genreMap = {};
-        // Mapeamento de IDs de empresa para seus respectivos nomes
         this.companyMap = {};
-        // Mapeamento de IDs de plataforma para seus respectivos nomes
         this.platformMap = {};
     }
 
-    fillGenreDropdown(genres) {
-        this.genreDropdown.innerHTML = '<option value="">Genres</option>';
-        genres.forEach(genre => {
-            this.genreMap[genre.id_genre] = genre.genre_desc; // Mapeamento de ID de gênero para nome
-            const option = document.createElement('option');
-            option.value = genre.id_genre;
-            option.textContent = genre.genre_desc;
-            this.genreDropdown.appendChild(option);
-        });
-    }
-
-    async loadGamesByGenre(genreId) {
+    async loadGamesByGenre(genreId, companyId, platformId) {
         try {
             const gamesResponse = await fetch('http://localhost:3000/game').then(response => response.json());
 
             this.gameList.innerHTML = '';
 
             gamesResponse.forEach(game => {
-                // Verifica se não há gênero selecionado ou se o jogo tem o gênero correspondente
-                if (!genreId || parseInt(game.genre_id) === parseInt(genreId)) {
+                const genreMatch = !genreId || parseInt(game.genre_id) === parseInt(genreId);
+                const companyMatch = !companyId || parseInt(game.company_id) === parseInt(companyId);
+                const platformMatch = !platformId || parseInt(game.platform_id) === parseInt(platformId);
+
+                if (genreMatch && companyMatch && platformMatch) {
                     const listItem = document.createElement('li');
                     listItem.className = 'gameItem';
 
@@ -56,7 +47,26 @@ class GenrePage {
     async init() {
         this.genreDropdown.addEventListener('change', () => {
             const selectedGenreId = this.genreDropdown.value;
-            this.loadGamesByGenre(selectedGenreId);
+            const selectedCompanyId = this.companyDropdown.value;
+            const selectedPlatformId = this.platformDropdown.value;
+
+            this.loadGamesByGenre(selectedGenreId, selectedCompanyId, selectedPlatformId);
+        });
+
+        this.companyDropdown.addEventListener('change', () => {
+            const selectedGenreId = this.genreDropdown.value;
+            const selectedCompanyId = this.companyDropdown.value;
+            const selectedPlatformId = this.platformDropdown.value;
+
+            this.loadGamesByGenre(selectedGenreId, selectedCompanyId, selectedPlatformId);
+        });
+
+        this.platformDropdown.addEventListener('change', () => {
+            const selectedGenreId = this.genreDropdown.value;
+            const selectedCompanyId = this.companyDropdown.value;
+            const selectedPlatformId = this.platformDropdown.value;
+
+            this.loadGamesByGenre(selectedGenreId, selectedCompanyId, selectedPlatformId);
         });
 
         try {
@@ -67,8 +77,9 @@ class GenrePage {
             ]);
 
             this.fillGenreDropdown(genreResponse);
+            this.fillCompanyDropdown(companyResponse);
+            this.fillPlatformDropdown(platformResponse);
 
-            // Preenche os mapeamentos de empresas e plataformas
             companyResponse.forEach(company => {
                 this.companyMap[company.id_company] = company.company_desc;
             });
@@ -77,10 +88,43 @@ class GenrePage {
                 this.platformMap[platform.id_platform] = platform.platform_desc;
             });
 
-            await this.loadGamesByGenre(null); // Carrega todos os jogos inicialmente
+            await this.loadGamesByGenre(null, null, null); // Carrega todos os jogos inicialmente
         } catch (error) {
             console.error('Error initializing:', error);
         }
+    }
+
+    fillGenreDropdown(genres) {
+        this.genreDropdown.innerHTML = '<option value="">Genres</option>';
+        genres.forEach(genre => {
+            this.genreMap[genre.id_genre] = genre.genre_desc;
+            const option = document.createElement('option');
+            option.value = genre.id_genre;
+            option.textContent = genre.genre_desc;
+            this.genreDropdown.appendChild(option);
+        });
+    }
+
+    fillCompanyDropdown(companies) {
+        this.companyDropdown.innerHTML = '<option value="">Companies</option>';
+        companies.forEach(company => {
+            this.companyMap[company.id_company] = company.company_desc;
+            const option = document.createElement('option');
+            option.value = company.id_company;
+            option.textContent = company.company_desc;
+            this.companyDropdown.appendChild(option);
+        });
+    }
+
+    fillPlatformDropdown(platforms) {
+        this.platformDropdown.innerHTML = '<option value="">Platforms</option>';
+        platforms.forEach(platform => {
+            this.platformMap[platform.id_platform] = platform.platform_desc;
+            const option = document.createElement('option');
+            option.value = platform.id_platform;
+            option.textContent = platform.platform_desc;
+            this.platformDropdown.appendChild(option);
+        });
     }
 }
 

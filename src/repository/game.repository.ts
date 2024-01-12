@@ -101,6 +101,48 @@ export class GameRepository{
         }))
     }
 
+    async getGamesByGenreAndPlatform(genreId: number, platformId: number): Promise<Game[]> {
+        const records = await this.db.all("SELECT * FROM game WHERE genre_id = ? AND platform_id = ?", genreId, platformId)
+    
+        return records.map((record) => ({
+            id_game: record.id_game,
+            name: record.name,
+            release_date: record.release_date,
+            rating: record.rating,
+            genre_id: record.genre_id,
+            company_id: record.company_id,
+            platform_id: record.platform_id
+        }))
+    }
+
+    async getGamesByCompanyAndPlatform(companyId: number, platformId: number): Promise<Game[]> {
+        const records = await this.db.all("SELECT * FROM game WHERE company_id = ? AND platform_id = ?", companyId, platformId)
+    
+        return records.map((record) => ({
+            id_game: record.id_game,
+            name: record.name,
+            release_date: record.release_date,
+            rating: record.rating,
+            genre_id: record.genre_id,
+            company_id: record.company_id,
+            platform_id: record.platform_id
+        }))
+    }
+
+    async getGamesByGenreCompanyAndPlatform(genreId:number, companyId: number, platformId: number): Promise<Game[]> {
+        const records = await this.db.all("SELECT * FROM game WHERE genre_id = ? AND company_id = ? AND platform_id = ?",genreId, companyId, platformId)
+    
+        return records.map((record) => ({
+            id_game: record.id_game,
+            name: record.name,
+            release_date: record.release_date,
+            rating: record.rating,
+            genre_id: record.genre_id,
+            company_id: record.company_id,
+            platform_id: record.platform_id
+        }))
+    }
+
     async addGame(name: string, release_date: Date, rating: number, genre_id: number, company_id: number, platform_id: number): Promise<number> {
         const result = await this.db.run(
             "INSERT INTO game(name, release_date, rating, genre_id, company_id, platform_id) VALUES (?,?,?,?,?,?)",

@@ -1,12 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const gameList = document.getElementById('gameList');
-
-    // Mapeamento de IDs de gênero para seus respectivos nomes
-    const genreMap = {};
-    // Mapeamento de IDs de empresa para seus respectivos nomes
-    const companyMap = {};
-    // Mapeamento de IDs de plataforma para seus respectivos nomes
-    const platformMap = {};
+    const sortOptionSelect = document.getElementById('sortOption');
 
     // Função para carregar a lista de jogos
     async function loadGames() {
@@ -18,8 +12,26 @@ document.addEventListener('DOMContentLoaded', async function () {
                 fetch('http://localhost:3000/platform').then(response => response.json())
             ]);
 
-
-            console.log('Games:', gamesResponse);
+            // Ordena os jogos de acordo com a opção selecionada
+            const sortOption = sortOptionSelect.value;
+            gamesResponse.sort((a, b) => {
+                switch (sortOption) {
+                    case 'releaseDateDesc':
+                        return new Date(b.release_date) - new Date(a.release_date);
+                    case 'releaseDateAsc':
+                        return new Date(a.release_date) - new Date(b.release_date);
+                    case 'ratingDesc':
+                        return b.rating - a.rating;
+                    case 'ratingAsc':
+                        return a.rating - b.rating;
+                    case 'nameAsc':
+                        return a.name.localeCompare(b.name);
+                    case 'nameDesc':
+                        return b.name.localeCompare(a.name);
+                    default:
+                        return 0; // Nenhuma ordenação
+                }
+            });
 
             gameList.innerHTML = '';
 
@@ -47,6 +59,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Inicializa a lista de jogos ao carregar a página
     await loadGames();
+
+    // Adiciona um ouvinte de evento para recarregar os jogos quando a opção de ordenação muda
+    sortOptionSelect.addEventListener('change', loadGames);
 });
 
 function editGame(gameId) {

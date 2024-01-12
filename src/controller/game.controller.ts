@@ -63,6 +63,39 @@ export class GameController{
         res.status(200).json(games)
     }
 
+    async getGamesByGenreAndPlatform(req: Request, res: Response) {
+        const { genreId, platformId } = req.params
+        const games = await this.gameRepository.getGamesByGenreAndPlatform(parseInt(genreId), parseInt(platformId))
+    
+        if (games.length === 0) {
+            return res.status(404).json({ error: "game not found" })
+        }
+    
+        res.status(200).json(games)
+    }
+
+    async getGamesByCompanyAndPlatform(req: Request, res: Response) {
+        const { companyId, platformId } = req.params
+        const games = await this.gameRepository.getGamesByCompanyAndPlatform(parseInt(companyId), parseInt(platformId))
+    
+        if (games.length === 0) {
+            return res.status(404).json({ error: "game not found" })
+        }
+    
+        res.status(200).json(games)
+    }
+
+    async getGamesByGenreCompanyAndPlatform(req: Request, res: Response) {
+        const { genreId, companyId, platformId } = req.params
+        const games = await this.gameRepository.getGamesByGenreCompanyAndPlatform(parseInt(genreId), parseInt(companyId), parseInt(platformId))
+    
+        if (games.length === 0) {
+            return res.status(404).json({ error: "game not found" })
+        }
+    
+        res.status(200).json(games)
+    }
+
     async getGamesByPlatform(req: Request, res: Response) {
         const { platformId } = req.params;
         const games = await this.gameRepository.getGamesByPlatformId(parseInt(platformId))
