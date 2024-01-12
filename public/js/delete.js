@@ -16,9 +16,6 @@ async function deleteGame(gameId) {
             });
 
             if (response.ok) {
-                // Jogo excluído com sucesso - exibir pop-up
-                alert('Jogo excluído com sucesso!');
-                // Recarregar a página para atualizar a lista de jogos
                 window.location.reload();
             } else {
                 // Exibir mensagem de erro em pop-up
