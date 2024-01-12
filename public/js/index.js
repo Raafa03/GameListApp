@@ -78,7 +78,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     await loadGames()
-a
     sortOptionSelect.addEventListener('change', loadGames)
 })
 

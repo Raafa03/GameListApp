@@ -85,13 +85,14 @@ async function createGame() {
             body: JSON.stringify(formDataObject),
         })
 
-        if (response.ok) {
-            alert('Game added !')
+        
+        if (response.status === 201) {
+            alert('Game added!')
             window.location.href = 'index.html'
-        } else {
-            alert('Error adding game' + response.statusText)
-        }
+        } 
+      
     } catch (error) {
-        alert('Error adding game' + error.message)
+        console.error('Error adding game:', error)
+        alert('Error adding game: ' + error.message)
     }
 }
