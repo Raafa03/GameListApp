@@ -160,6 +160,7 @@ export class GameController{
 
         if (!deletedGame) {
             res.status(404).json({ error: "game not found" })
+            return
         }
 
         res.status(200).json({ message: "game deleted successfully" })
