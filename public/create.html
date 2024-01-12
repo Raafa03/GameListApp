@@ -3,40 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Jogo</title>
+    <title>Create Game</title>
     <link rel="stylesheet" text="text/css" href="css/create.css">   
 </head>
 <body>
-    <h1>Criar Jogo</h1>
+    <h1>Create Game</h1>
 
     <button id="HomeButton" onclick="location.href='index.html'">Home</button>
 
     <form id="gameForm">
-        <label for="name">Nome:</label>
-        <input type="text" id="name" name="name" required>
+        <label for="name">Name:</label>
+        <input class="inputs" type="text" id="name" name="name" required>
 
-        <label for="release_date">Data de Lançamento:</label>
-        <input type="date" id="release_date" name="release_date" required>
+        <label for="release_date">Release Date:</label>
+        <input class="inputs" type="date" id="release_date" name="release_date" required>
 
-        <label for="rating">Avaliação:</label>
-        <input type="number" id="rating" name="rating" step="0.1" required>
+        <label for="rating">Rating:</label>
+        <input class="inputs" type="number" id="rating" name="rating" step="0.1" required>
 
-        <label for="genre_desc">Gênero:</label>
-        <select id="genre_desc" name="genre_desc" required>
+        <label for="genre_desc">Genre:</label>
+        <select class="custom-dropdown" id="genre_desc" name="genre_desc" required>
             
         </select>
 
-        <label for="company_desc">Empresa:</label>
-        <select id="company_desc" name="company_desc" required>
+        <label for="company_desc">Company:</label>
+        <select class="custom-dropdown" id="company_desc" name="company_desc" required>
             
         </select>
 
-        <label for="platform_desc">Plataforma:</label>
-        <select id="platform_desc" name="platform_desc" required>
+        <label for="platform_desc">Platform:</label>
+        <select class="custom-dropdown" id="platform_desc" name="platform_desc" required>
             
         </select>
 
-        <button id="createGameButton" type="button" onclick="createGame()">Criar Jogo</button>
+        <button id="createGameButton" type="button" onclick="createGame()">Create Game</button>
     </form>
 
     <script src="../public/js/create.js"></script>
