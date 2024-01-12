@@ -85,11 +85,17 @@ async function createGame() {
             body: JSON.stringify(formDataObject),
         })
 
-        
         if (response.status === 201) {
             alert('Game added!')
             window.location.href = 'index.html'
-        } 
+        } else if (response.status === 409) {
+            const errorMessage = await response.text()
+            alert('A game with the same name and platform already exists')
+        } else {
+            const errorMessage = await response.text()
+            console.error('Error adding game:', errorMessage)
+            alert('Error adding game: ' + errorMessage)
+        }
       
     } catch (error) {
         console.error('Error adding game:', error)

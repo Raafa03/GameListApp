@@ -33,7 +33,7 @@ async function deleteGame(gameId) {
     }
 }
 
-// Fechar o Popup user clicar fora do Popup
+// Fechar o Popup se o user clicar fora do Popup
 window.addEventListener('click', (event) => {
     if (event.target === confirmationModal) {
         confirmationModal.style.display = 'none'

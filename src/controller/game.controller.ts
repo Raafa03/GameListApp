@@ -15,7 +15,6 @@ export class GameController{
         const { platformId } = req.params
         const games = await this.gameRepository.getGames()
         res.status(200).json(games)
-        console.log(req.params)
     }
 
     async getGame(req: Request, res: Response){
@@ -108,36 +107,53 @@ export class GameController{
     }
     
 
-    async addGame(req: Request, res: Response){
-        const {name, release_date, rating, genre_desc, company_desc,platform_desc} = req.body
-        const id = await this.gameRepository.addGame(name, release_date, rating, genre_desc, company_desc, platform_desc)
-        res.status(201).json({id:id})
-
-        console.log(req.body)
+    async addGame(req: Request, res: Response) {
+        const { name, release_date, rating, genre_desc, company_desc, platform_desc } = req.body
+    
+        try {
+            const result = await this.gameRepository.addGame(name, release_date, rating, genre_desc, company_desc, platform_desc)
+    
+            if (typeof result === 'string') {
+                res.status(409).json({ error: result })
+            } else {
+                res.status(201).json({ id: result })
+            }
+        } catch (error) {
+            console.error('Error adding game:', error)
+            res.status(500).json({ error: 'Internal Server Error' })
+        }
     }
+    
 
 
     async updateGame(req: Request, res: Response) {
         const { gameId } = req.params
-        const { editName, editReleaseDate, editRating, editGenre, editCompany, editPlatform} = req.body
-
-        const updatedGame = await this.gameRepository.updateGameById(
-            parseInt(gameId),
-            editName,
-            editReleaseDate,
-            editRating,
-            editGenre,
-            editCompany,
-            editPlatform
-        )
-        console.log(req.body,req.params)
-
-        if (!updatedGame) {
-            res.status(404).json({ error: "game not found" })
+        const { editName, editReleaseDate, editRating, editGenre, editCompany, editPlatform } = req.body
+    
+        try {
+            const updatedGame = await this.gameRepository.updateGameById(
+                parseInt(gameId),
+                editName,
+                editReleaseDate,
+                editRating,
+                editGenre,
+                editCompany,
+                editPlatform
+            )
+    
+            if (typeof updatedGame === 'string') {
+                res.status(409).json({ error: updatedGame })
+            } else if (!updatedGame) {
+                res.status(404).json({ error: "game not found" })
+            } else {
+                res.status(200).json(updatedGame)
+            }
+        } catch (error) {
+            console.error('Error updating game:', error)
+            res.status(500).json({ error: 'Internal Server Error' })
         }
-
-        res.status(200).json(updatedGame)
     }
+    
 
     async deleteGame(req: Request, res: Response) {
         const { gameId } = req.params

@@ -145,10 +145,10 @@ export class GameRepository{
 
     async addGame(name: string, release_date: Date, rating: number, genre_id: number, company_id: number, platform_id: number): Promise<number | string> {
         // Verificar se já existe um jogo com o mesmo nome e plataforma
-        const existingGame = await this.db.get("SELECT * FROM game WHERE name = ? AND platform_id = ?", name, platform_id);
+        const existingGame = await this.db.get("SELECT * FROM game WHERE name = ? AND platform_id = ?", name, platform_id)
     
         if (existingGame) {
-            return 'A game with the same name and platform already exists';
+            return 'A game with the same name and platform already exists'
         }
 
         const result = await this.db.run(
@@ -164,8 +164,14 @@ export class GameRepository{
 
         return result.lastID
     }
+    async updateGameById(id_game: number, name: string, release_date: Date, rating: number, genre_id: number, company_id: number, platform_id: number): Promise<Game | string> {
+        // Verificar se já existe um jogo com o mesmo nome e plataforma
+        const existingGame = await this.db.get("SELECT * FROM game WHERE name = ? AND platform_id = ? AND id_game <> ?", name, platform_id, id_game)
     
-    async updateGameById(id_game: number, name: string, release_date: Date, rating: number, genre_id: number, company_id: number, platform_id: number): Promise<Game> {
+        if (existingGame) {
+            return 'A game with the same name and platform already exists'
+        }
+    
         const result = await this.db.run(
             "UPDATE game SET name=?, release_date=?, rating=?, genre_id=?, company_id=?, platform_id=? WHERE id_game=?",
             name,
@@ -176,13 +182,11 @@ export class GameRepository{
             platform_id,
             id_game
         )
-
-
+    
         if (result.changes === 0) {
-            return null      
+            return null
         }
-       
-
+    
         return {
             id_game,
             name,
@@ -192,8 +196,8 @@ export class GameRepository{
             company_id,
             platform_id
         }
-        
     }
+    
 
     async deleteGameById(id: number): Promise<Game> {
         const gameToDelete = await this.getGameById(id)

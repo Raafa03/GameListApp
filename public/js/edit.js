@@ -97,12 +97,16 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         
         if (response.ok) {
-            alert('Game updated !')
+            alert('Game updated!')
             window.location.href = 'index.html'
+        } else if (response.status === 409) {
+            const errorResponse = await response.json()
+            alert('A game with the same name and platform already exists')
         } else {
-            alert('Error updating game' + response.statusText)
+            alert('Error updating game: ' + response.statusText)
         }
+
     } catch (error) {
-        alert('Error updating game' + error.message)
+        alert('Error updating game: ' + error.message)
     }
 }
