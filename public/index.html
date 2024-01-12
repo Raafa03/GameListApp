@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Jogos</title>
+    <title>Game Library</title>
     <link rel="stylesheet" text="text/css" href="css/index.css">
 </head>
 <body>
-    <h1>Lista de Jogos</h1>
+    <h1>Game Library</h1>
 
-    <a href="create.html">
-        <button id="AddGameButton" class="custom-button">Adicionar Jogo</button>
-    </a>
+    <button id="AddGameButton" onclick="location.href='create.html'">Add Game</button>
 
     <label for="genreDropdown"></label>
     <select id="genreDropdown" class="custom-dropdown">
@@ -29,7 +27,7 @@
     </select>
 
     <!-- Adicionando o seletor de opções de ordenação -->
-    <label for="sortOption">Ordenar por:</label>
+    <label for="sortOption">Order By:</label>
     <select id="sortOption" onchange="loadGames()">
         <option value="nameAsc"> A - Z</option>
         <option value="nameDesc"> Z- A </option>
@@ -40,15 +38,6 @@
     </select>
 
     <ul id="gameList"></ul>
-
-    <!-- Modal para confirmação de exclusão -->
-    <div id="confirmationModal" class="modal">
-        <div class="modal-content">
-            <p>Tem certeza de que deseja excluir este jogo?</p>
-            <button id="confirmDelete">Sim</button>
-            <button id="cancelDelete">Cancelar</button>
-        </div>
-    </div>
 
     <script src="../public/js/index.js"></script>
     <script src="../public/js/delete.js"></script>

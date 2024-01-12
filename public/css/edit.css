@@ -1,10 +1,38 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 20px;
+    background-color: #121212;
+    color: #ffffff;
 }
 
 h1 {
     text-align: center;
+    color: #303f9f;
+}
+
+label, select {
+    margin-right: 25px;
+    align-content: center;
+}
+
+select.custom-dropdown {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #303f9f;
+    border-radius: 5px;
+    background-color: #2E2E2E; 
+    color: #ffffff;
+    font-size: 16px;
+}
+
+input.inputs {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #303f9f;
+    border-radius: 5px;
+    background-color: #2E2E2E;
+    color: #ffffff;
+    font-size: 16px;
 }
 
 form {
@@ -26,21 +54,37 @@ select {
 }
 
 #updateGameButton {
-    background-color: #4CAF50;
-    color: white;
+    background: linear-gradient(45deg, #FF40FF, #FF73FF); 
+    color: #121212; 
     padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.9em; 
+    letter-spacing: 1px; 
+    transition: background 0.3s, color 0.3s;
     width: 100%;
 }
 
+#updateGameButton:hover {
+    background: linear-gradient(45deg, #FF73FF, #FF40FF);
+    color: #121212;
+}
+
 #HomeButton{
-    background-color: red;
+    background: linear-gradient(45deg, #303f9f, #2f72a9);
     color: white;
     padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    float: left;
+    width: 150px;
+    margin: 10px;
+    transition: background 0.3s;
+}
+
+#HomeButton:hover {
+    background: linear-gradient(45deg, #2f72a9, #303f9f);
 }

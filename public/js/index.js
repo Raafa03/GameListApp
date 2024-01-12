@@ -46,8 +46,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                     Genre: ${game.genre_id ? genreResponse.find(genre => genre.id_genre === game.genre_id).genre_desc : 'N/A'}<br>
                     Company: ${game.company_id ? companyResponse.find(company => company.id_company === game.company_id).company_desc : 'N/A'}<br>
                     Platform: ${game.platform_id ? platformResponse.find(platform => platform.id_platform === game.platform_id).platform_desc : 'N/A'}<br>
-                    <button id="deleteGameButton" onclick="deleteGame(${game.id_game})">Excluir</button>
-                    <button id="editGameButton" onclick="editGame(${game.id_game})">Editar</button>
+                    <button id="deleteGameButton" onclick="deleteGame(${game.id_game})">Delete</button>
+                    <button id="editGameButton" onclick="editGame(${game.id_game})">Edit</button>
                 `;
                 gameList.appendChild(listItem);
             });

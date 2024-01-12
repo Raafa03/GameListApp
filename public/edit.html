@@ -1,46 +1,43 @@
-<!-- edit.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Jogo</title>
-    <link rel="stylesheet" text="text/css" href="css/edit.css">   
-    
+    <title>Edit Game</title>
+    <link rel="stylesheet" text="text/css" href="css/edit.css">
+
 </head>
 <body>
-    <h1>Editar Jogo</h1>
+    <h1>Edit Game</h1>
 
-    <a href="index.html">
-        <button id="HomeButton">Home</button>
-    </a>
+    <button id="HomeButton" onclick="location.href='index.html'">Home</button>
 
     <form id="editForm">
-        <label for="editName">Nome:</label>
-        <input type="text" id="editName" name="editName" required>
+        <label for="editName">Name:</label>
+        <input class="inputs" type="text" id="editName" name="editName" required>
 
-        <label for="editReleaseDate">Data de Lançamento:</label>
-        <input type="date" id="editReleaseDate" name="editReleaseDate" required>
+        <label for="editReleaseDate">Release Date:</label>
+        <input class="inputs" type="date" id="editReleaseDate" name="editReleaseDate" required>
 
-        <label for="editRating">Avaliação:</label>
-        <input type="number" id="editRating" name="editRating" step="0.1" required>
+        <label for="editRating">Rating:</label>
+        <input class="inputs" type="number" id="editRating" name="editRating" step="0.1" required>
 
-        <label for="editGenre">Gênero:</label>
-        <select id="editGenre" name="editGenre" required>
+        <label for="editGenre">Genre:</label>
+        <select class="custom-dropdown" id="editGenre" name="editGenre" required>
             <!-- Options serão preenchidas dinamicamente com JavaScript -->
         </select>
 
-        <label for="editCompany">Empresa:</label>
-        <select id="editCompany" name="editCompany" required>
+        <label for="editCompany">Company:</label>
+        <select class="custom-dropdown" id="editCompany" name="editCompany" required>
             <!-- Options serão preenchidas dinamicamente com JavaScript -->
         </select>
 
-        <label for="editPlatform">Plataforma:</label>
-        <select id="editPlatform" name="editPlatform" required>
+        <label for="editPlatform">Platform:</label>
+        <select class="custom-dropdown" id="editPlatform" name="editPlatform" required>
             <!-- Options serão preenchidas dinamicamente com JavaScript -->
         </select>
 
-        <button id="updateGameButton" type="button" onclick="updateGame()">Atualizar Jogo</button>
+        <button id="updateGameButton" type="button" onclick="updateGame()">Edit Game</button>
     </form>
     <script src="../public/js/edit.js"></script>
 </body>

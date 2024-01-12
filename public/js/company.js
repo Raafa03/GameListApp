@@ -31,8 +31,8 @@ class CompanyPage {
                         Genre: ${game.genre_id ? this.genreMap[game.genre_id] : 'N/A'}<br>
                         Company: ${game.company_id ? this.companyMap[game.company_id] : 'N/A'}<br>
                         Platform: ${game.platform_id ? this.platformMap[game.platform_id] : 'N/A'}<br>
-                        <button id="deleteGameButton" onclick="deleteGame(${game.id_game})">Excluir</button>
-                        <button id="editGameButton" onclick="editGame(${game.id_game})">Editar</button>
+                        <button id="deleteGameButton" onclick="deleteGame(${game.id_game})">Delete</button>
+                        <button id="editGameButton" onclick="editGame(${game.id_game})">Edit</button>
                     `;
 
                     this.gameList.appendChild(listItem);
