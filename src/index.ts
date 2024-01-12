@@ -37,6 +37,7 @@ api.use(express.json())
 
 console.log("Registering games routes")
 api.get("/game", gameController.listGames.bind(gameController))
+api.get("/game/name/:name", gameController.searchGames.bind(gameController))
 api.post("/game", gameController.addGame.bind(gameController))
 api.get("/game/:gameId", gameController.getGame.bind(gameController))
 api.get("/game/genre/:genreId", gameController.getGameByGenre.bind(gameController))
@@ -48,6 +49,8 @@ api.get("/game/:companyId/:platformId", gameController.getGamesByGenreAndCompany
 api.get("/game/:genreId/:companyId/:platformId", gameController.getGamesByGenreCompanyAndPlatform.bind(gameController))
 api.put("/game/:gameId", gameController.updateGame.bind(gameController))
 api.delete("/game/:gameId", gameController.deleteGame.bind(gameController))
+
+
 
 console.log("Registering genre routes")
 api.get("/genre", genreController.listGenres.bind(genreController))

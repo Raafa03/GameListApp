@@ -210,4 +210,19 @@ export class GameRepository{
 
         return gameToDelete
     }
+
+    async searchGamesByName(name: string): Promise<Game[]> {
+        const records = await this.db.all("SELECT * FROM game WHERE LOWER(name) LIKE LOWER(?)", `%${name}%`)
+        return records.map((record): Game => ({
+            id_game: record.id_game,
+            name: record.name,
+            release_date: record.release_date,
+            rating: record.rating,
+            genre_id: record.genre_id,
+            company_id: record.company_id,
+            platform_id: record.platform_id
+        }))
+    }
+
+
 }

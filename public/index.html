@@ -9,7 +9,7 @@
 <body>
     <h1>Game Library</h1>
 
-    <button id="AddGameButton" onclick="location.href='create.html'">Add Game</button>
+    <button id="AddGameButton"  onclick="location.href='create.html'">Add Game</button>
 
     <label for="genreDropdown"></label>
     <select id="genreDropdown" class="custom-dropdown">
@@ -34,6 +34,9 @@
         <option value="ratingDesc"> Rating (Higher) </option>
         <option value="ratingAsc"> Rating (Lower) </option>
     </select>
+
+    <input type="text" id="gameSearchInput" placeholder="Search game...">
+    <button id="gameSearchButton"  onclick="searchGames()">Search</button>
 
     <ul id="gameList"></ul>
 

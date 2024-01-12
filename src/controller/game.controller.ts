@@ -10,9 +10,6 @@ export class GameController{
     }
 
     async listGames(req: Request, res: Response){
-        const { genreId } = req.params
-        const { companyId } = req.params
-        const { platformId } = req.params
         const games = await this.gameRepository.getGames()
         res.status(200).json(games)
     }
@@ -23,6 +20,7 @@ export class GameController{
 
         if(!game){
             res.status(404).json({error: "game not found"})
+            return
         }
 
         res.status(200).json(game)
@@ -165,6 +163,22 @@ export class GameController{
         }
 
         res.status(200).json({ message: "game deleted successfully" })
+    }
+
+    async searchGames(req: Request, res: Response) {
+        const { name } = req.params
+    
+        try {
+            if (typeof name === 'string') {
+                const games = await this.gameRepository.searchGamesByName(name)
+               return  res.status(200).json(games)
+            } else {
+                return res.status(400).json({ error: 'Invalid input for name' })
+            }
+        } catch (error) {
+            console.error('Error searching games:', error)
+            return res.status(500).json({ error: 'Internal Server Error' })
+        }
     }
 
 }
