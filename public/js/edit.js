@@ -58,11 +58,27 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 });
 
-// Função para atualizar o jogo
-async function updateGame() {
+    // Função para atualizar o jogo
+    async function updateGame() {
     const gameId = new URLSearchParams(window.location.search).get('id');
     const editForm = document.getElementById('editForm');
     const formData = new FormData(editForm);
+
+     // Verificar se os campos obrigatórios estão preenchidos
+     const requiredFields = ['editName', 'editReleaseDate', 'editRating', 'editGenre', 'editCompany', 'editPlatform'];
+     for (const field of requiredFields) {
+         if (!formData.get(field)) {
+             alert(`Please fill de field ${field.replace('edit', '')}.`);
+             return; // Impede o envio do formulário se um campo obrigatório estiver em falta
+         }
+     }
+ 
+     // Verificar se o campo de classificação contém um valor numérico válido entre 0 e 10
+     const rating = parseFloat(formData.get('editRating'));
+     if (isNaN(rating) || rating < 0 || rating > 10) {
+         alert('Please insert a valid rating between 0 and 10');
+         return; // Impede o envio do formulário se a classificação não for válida
+     }
 
     try {
         // Criar um objeto JavaScript com os dados do formulário

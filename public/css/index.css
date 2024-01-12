@@ -134,3 +134,19 @@ select.custom-dropdown {
 #AddGameButton:hover {
     background: linear-gradient(45deg, #2f72a9, #303f9f);
 }
+
+#sortOption {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #303f9f;
+    border-radius: 5px;
+    background-color: #2E2E2E;
+    color: #ffffff;
+    font-size: 16px;
+    margin: 0 10px; 
+}
+
+#sortOption option {
+    background-color: #2E2E2E;
+    color: #ffffff;
+}

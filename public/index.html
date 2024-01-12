@@ -13,34 +13,31 @@
 
     <label for="genreDropdown"></label>
     <select id="genreDropdown" class="custom-dropdown">
-        <!-- As opções serão preenchidas dinamicamente pelo JavaScript -->
     </select>
 
     <label for="companyDropdown"></label>
     <select id="companyDropdown" class="custom-dropdown">
-        <!-- As opções serão preenchidas dinamicamente pelo JavaScript -->
     </select>
 
     <label for="platformDropdown"></label>
     <select id="platformDropdown" class="custom-dropdown">
-        <!-- As opções serão preenchidas dinamicamente pelo JavaScript -->
     </select>
 
-    <!-- Adicionando o seletor de opções de ordenação -->
+    <!-- Dropdown Order By-->
     <label for="sortOption">Order By:</label>
     <select id="sortOption" onchange="loadGames()">
         <option></option>
-        <option value="nameAsc"> A - Z</option>
-        <option value="nameDesc"> Z- A </option>
-        <option value="releaseDateDesc">Release Date (Newest)</option>
-        <option value="releaseDateAsc">Release Date (Oldest)</option>
-        <option value="ratingDesc">Rating (Higher)</option>
-        <option value="ratingAsc">Rating (Lower)</option>
+        <option value="nameAsc"> A-Z </option>
+        <option value="nameDesc"> Z-A </option>
+        <option value="releaseDateDesc"> Release Date (Newest) </option>
+        <option value="releaseDateAsc"> Release Date (Oldest) </option>
+        <option value="ratingDesc"> Rating (Higher) </option>
+        <option value="ratingAsc"> Rating (Lower) </option>
     </select>
 
     <ul id="gameList"></ul>
 
-    <!-- Modal para confirmação de exclusão -->
+    <!-- Popup de eliminação -->
     <div id="confirmationModal" class="modal">
         <div class="modal-content">
             <p>Do you really wish to delete this game ?</p>

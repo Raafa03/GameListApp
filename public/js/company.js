@@ -9,6 +9,7 @@ class CompanyPage {
         this.platformMap = {};
     }
 
+
     async loadGamesByCompany(companyId, genreId, platformId) {
         try {
             const gamesResponse = await fetch('http://localhost:3000/game').then(response => response.json());
@@ -92,7 +93,7 @@ class CompanyPage {
                 this.platformMap[platform.id_platform] = platform.platform_desc;
             });
 
-            await this.loadGamesByCompany(null, null, null); // Carrega todos os jogos inicialmente
+            await this.loadGamesByCompany(null, null, null);
         } catch (error) {
             console.error('Error initializing:', error);
         }

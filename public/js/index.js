@@ -5,12 +5,12 @@ document.addEventListener('DOMContentLoaded', async function () {
     const companyDropdown = document.getElementById('companyDropdown');
     const platformDropdown = document.getElementById('platformDropdown');
 
-    // Armazena os filtros selecionados
+
     let selectedGenreId = genreDropdown.value;
     let selectedCompanyId = companyDropdown.value;
     let selectedPlatformId = platformDropdown.value;
 
-    // Função para carregar a lista de jogos
+
     async function loadGames() {
         try {
             const [gamesResponse, genreResponse, companyResponse, platformResponse] = await Promise.all([
@@ -20,12 +20,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                 fetch('http://localhost:3000/platform').then(response => response.json())
             ]);
 
-            // Atualiza os filtros com os valores atuais
+ 
             selectedGenreId = genreDropdown.value;
             selectedCompanyId = companyDropdown.value;
             selectedPlatformId = platformDropdown.value;
 
-            // Ordena os jogos de acordo com a opção selecionada
+            // Dropdown Order By
             const sortOption = sortOptionSelect.value;
             gamesResponse.sort((a, b) => {
                 switch (sortOption) {
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     case 'nameDesc':
                         return b.name.localeCompare(a.name);
                     default:
-                        return 0; // Nenhuma ordenação
+                        return 0; 
                 }
             });
 
@@ -77,9 +77,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 
-    // Inicializa a lista de jogos ao carregar a página
     await loadGames();
-
-    // Adiciona um ouvinte de evento para recarregar os jogos quando a opção de ordenação muda
+a
     sortOptionSelect.addEventListener('change', loadGames);
 });
+
+function editGame(gameId) {
+    window.location.href = `edit.html?id=${gameId}`;
+}
+

@@ -14,16 +14,14 @@ function fillDropdown(dropdownId, options) {
     // Preencher as opções
     options.forEach(option => {
         const optionElement = document.createElement('option');
-        optionElement.value = option.id_genre || option.id_company || option.id_platform 
-        optionElement.textContent = option.genre_desc || option.company_desc || option.platform_desc 
+        optionElement.value = option.id_genre || option.id_company || option.id_platform;
+        optionElement.textContent = option.genre_desc || option.company_desc || option.platform_desc;
         dropdown.appendChild(optionElement);
     });
-    
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
     try {
-        
         // Carregar dados de gênero, empresa e plataforma
         const [genres, companies, platforms] = await Promise.all([
             fetch('http://localhost:3000/genre').then(response => response.json()),
@@ -36,12 +34,30 @@ document.addEventListener('DOMContentLoaded', async function () {
         fillDropdown('company_desc', companies);
         fillDropdown('platform_desc', platforms);
 
-        
-
     } catch (error) {
         console.error('Error loading data:', error);
     }
 });
+
+// Função para validar o formulário
+function validateForm(formDataObject) {
+    for (const key in formDataObject) {
+        if (!formDataObject[key]) {
+            alert(`Please, fill all the fields! The field "${key}" can't be empty`);
+            return false;
+        }
+
+         // Adicionando verificação para o campo 'rating'
+         if (key === 'rating') {
+            const rating = parseFloat(formDataObject[key]);
+            if ( rating < 0 || rating > 10) {
+                alert('Please insert a valid rating between 0 and 10');
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
 // Função para atualizar o jogo
 async function createGame() {
@@ -49,14 +65,18 @@ async function createGame() {
     const gameForm = document.getElementById('gameForm');
     const formData = new FormData(gameForm);
 
+    // Criar um objeto JavaScript com os dados do formulário
+    const formDataObject = {};
+    formData.forEach((value, key) => {
+        formDataObject[key] = value;
+    });
+
+    // Validar o formulário
+    if (!validateForm(formDataObject)) {
+        return;
+    }
+
     try {
-        // Criar um objeto JavaScript com os dados do formulário
-        const formDataObject = {};
-        formData.forEach((value, key) => {
-            formDataObject[key] = value;
-        });
-        
-        
         const response = await fetch(`http://localhost:3000/game`, {
             method: 'POST',
             headers: {
@@ -65,7 +85,6 @@ async function createGame() {
             body: JSON.stringify(formDataObject),
         });
 
-        
         if (response.ok) {
             // Jogo atualizado com sucesso - exibir pop-up
             alert('Jogo adicionado com sucesso!');

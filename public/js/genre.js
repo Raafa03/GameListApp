@@ -88,7 +88,7 @@ class GenrePage {
                 this.platformMap[platform.id_platform] = platform.platform_desc;
             });
 
-            await this.loadGamesByGenre(null, null, null); // Carrega todos os jogos inicialmente
+            await this.loadGamesByGenre(null, null, null);
         } catch (error) {
             console.error('Error initializing:', error);
         }
